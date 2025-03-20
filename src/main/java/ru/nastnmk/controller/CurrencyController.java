@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping("/api")
 @RestController
 public class CurrencyController {
+
     private final CurrencyService currencyService;
 
     @GetMapping("/currencies")

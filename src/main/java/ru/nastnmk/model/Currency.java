@@ -13,8 +13,4 @@ public class Currency {
     private String baseCurrency = "RUB";
     private String priceChangeRange;
     private String description;
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }
