@@ -1,6 +1,0 @@
-server:
-  port: 8080
-
-spring:
-  application:
-    name: currency_project_tbank

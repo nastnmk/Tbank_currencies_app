@@ -1,34 +1,49 @@
 package ru.nastnmk.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.nastnmk.model.Currency;
-import java.util.ArrayList;
+import org.springframework.transaction.annotation.Transactional;
+import ru.nastnmk.entity.Currency;
+import ru.nastnmk.repository.CurrencyRepository;
 
+import javax.crypto.Cipher;
 import java.util.List;
+import java.util.Spliterator;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 @Service
+@RequiredArgsConstructor
 public class CurrencyService {
-    private List<Currency> list_of_currencies = new ArrayList<>();
+    private final CurrencyRepository currencyRepository;
 
+    @Transactional(readOnly = true)
     public List<Currency> getCurrencies(){
-        return list_of_currencies;
+        return currencyRepository.findAllCurrencies();
     }
 
-    public Currency addCurrency(Currency currency){
-        currency.setId((UUID.randomUUID().toString()));
-        list_of_currencies.add(currency);
-        return currency;
+    @Transactional
+    public void addCurrency(Currency currency){
+        currencyRepository.save(currency);
     }
 
-    public Currency getCurrencyById(String id){
-        return null;
+    @Transactional(readOnly = true)
+    public Currency getCurrencyById(UUID id) {
+        return currencyRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Currency not found: " + id));
     }
 
-    public Currency updateCurrency(String id){
-        return null;
+    @Transactional
+    public Currency updateCurrency(UUID id, Currency currency){
+        Currency currency_now = currencyRepository.findById(id).orElseThrow(() -> new RuntimeException("Currency not found"));
+        currency_now.setName(currency.getName());
+        currency_now.setBaseCurrency(currency.getBaseCurrency());
+        currency_now.setDescription(currency.getDescription());
+        return currencyRepository.save(currency_now);
     }
 
-    public void deleteCurrency(String id){
+    @Transactional
+    public void deleteCurrency(UUID id){
+        currencyRepository.deleteById(id);
     }
 }

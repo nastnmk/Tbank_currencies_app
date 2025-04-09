@@ -6,12 +6,18 @@ plugins {
 
 group = "org.ru.nastnmk"
 version = "1.0-SNAPSHOT"
-
+java {
+    sourceCompatibility = JavaVersion.VERSION_19
+    targetCompatibility = JavaVersion.VERSION_19
+}
 repositories {
     mavenCentral()
 }
 
-dependencies {  
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.postgresql:postgresql:42.7.2")
+    implementation("org.liquibase:liquibase-core")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -26,7 +32,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.30")
     runtimeOnly("org.projectlombok:lombok:1.18.30") //when the project started
     implementation("org.springframework.boot:spring-boot-starter:3.3.4")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")//
 }
 
 tasks.test {
