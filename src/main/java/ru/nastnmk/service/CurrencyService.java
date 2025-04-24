@@ -46,4 +46,9 @@ public class CurrencyService {
     public void deleteCurrency(UUID id){
         currencyRepository.deleteById(id);
     }
+
+    @Transactional
+    public void deleteAll(){
+        currencyRepository.deleteAll();
+    }
 }
