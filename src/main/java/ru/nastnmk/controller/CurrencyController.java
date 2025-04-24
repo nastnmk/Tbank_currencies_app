@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import ru.nastnmk.service.CurrencyCheckerService;
 import ru.nastnmk.service.CurrencyService;
 
 import ru.nastnmk.entity.Currency;
@@ -46,6 +47,12 @@ public class CurrencyController {
     @DeleteMapping("/currencies/{id}")
     public ResponseEntity<Currency> deleteCurrency(@PathVariable String id){
         currencyService.deleteCurrency(UUID.fromString(id));
+        return null;
+    }
+
+    @DeleteMapping("/currencies")
+    public ResponseEntity<Currency> deleteAll(){
+        currencyService.deleteAll();
         return null;
     }
 

@@ -1,5 +1,15 @@
 FROM eclipse-temurin:19-jdk AS builder
 
-COPY build/libs/currency_project_tbank-1.0-SNAPSHOT.jar app_tbank.jar
-EXPOSE 8080
-CMD ["java", "-jar", "app_tbank.jar"]
+WORKDIR /app
+
+COPY . .
+
+RUN ./gradlew clean build -x test
+
+FROM eclipse-temurin:19-jre
+
+WORKDIR /app
+
+COPY --from=builder /app/build/libs/*.jar app.jar
+
+CMD ["java", "-jar", "app.jar"]
