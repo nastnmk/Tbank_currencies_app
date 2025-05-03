@@ -16,7 +16,6 @@ import java.util.UUID;
 @EnableConfigurationProperties(CurrencyConfig.class)
 public class FdsSpringApplication {
     public static void main(String[] args) {
-        SpringApplication.run(FdsSpringApplication.class, args).getBeanFactory().getBean(CurrencyController.class).addCurrency(new Currency(null, "name", "base", "price", "desc"));
-//        SpringApplication.run(FdsSpringApplication.class, args).getBean(CurrencyRepository.class).deleteAll();
+        SpringApplication.run(FdsSpringApplication.class, args);
     }
 }

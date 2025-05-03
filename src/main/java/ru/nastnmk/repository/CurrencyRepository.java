@@ -12,7 +12,5 @@ import java.util.stream.Stream;
 @Repository
 public interface CurrencyRepository extends JpaRepository<Currency, UUID>{
 
-    @Query(value = "SELECT * FROM currencies", nativeQuery = true)
-    List<Currency> findAllCurrencies();
 
 }

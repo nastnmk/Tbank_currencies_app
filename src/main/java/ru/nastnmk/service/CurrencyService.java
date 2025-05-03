@@ -19,7 +19,7 @@ public class CurrencyService {
 
     @Transactional(readOnly = true)
     public List<Currency> getCurrencies(){
-        return currencyRepository.findAllCurrencies();
+        return currencyRepository.findAll();
     }
 
     @Transactional
@@ -35,11 +35,11 @@ public class CurrencyService {
 
     @Transactional
     public Currency updateCurrency(UUID id, Currency currency){
-        Currency currency_now = currencyRepository.findById(id).orElseThrow(() -> new RuntimeException("Currency not found"));
-        currency_now.setName(currency.getName());
-        currency_now.setBaseCurrency(currency.getBaseCurrency());
-        currency_now.setDescription(currency.getDescription());
-        return currencyRepository.save(currency_now);
+        Currency currentCurrency = currencyRepository.findById(id).orElseThrow(() -> new RuntimeException("Currency not found"));
+        currentCurrency.setName(currency.getName());
+        currentCurrency.setBaseCurrency(currency.getBaseCurrency());
+        currentCurrency.setDescription(currency.getDescription());
+        return currencyRepository.save(currentCurrency);
     }
 
     @Transactional
